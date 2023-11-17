@@ -137,37 +137,335 @@ This function can return either a string or a number, and the return type is spe
 
 **🎉🎉🎉Update the Github Project board🎉🎉🎉**
 
+
+
 ## Level 2
 
 - What is a class?
 
 
+In TypeScript, a class is a fundamental building block for object-oriented programming. It provides a way to create blueprints for objects with properties and methods. Classes serve as a template for creating objects with similar structures and behavior.
+
+Here's a basic example of a class in TypeScript:
+
+```
+class Car {
+  // Properties
+  make: string;
+  model: string;
+  year: number;
+
+  // Constructor - a special method for initializing objects
+  constructor(make: string, model: string, year: number) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+
+  // Method
+  start() {
+    console.log(`The ${this.year} ${this.make} ${this.model} is starting.`);
+  }
+}
+
+// Creating an instance of the Car class
+const myCar = new Car('Toyota', 'Camry', 2022);
+
+// Accessing properties and calling methods
+console.log(myCar.make); // Output: Toyota
+myCar.start(); // Output: The 2022 Toyota Camry is starting.
+```
+
+In this example:
+
+Car is a class.
+make, model, and year are properties of the class.
+The constructor is a special method used for initializing the object when it is created.
+start is a method of the class.
+Classes in TypeScript support inheritance, encapsulation, and polymorphism, which are key principles of object-oriented programming. They help organize and structure your code, making it more maintainable and scalable.
+
 
 - What is a class constructor?
 
-
+Like we see behind, on the class part, the constructor is a special method used for initializing the object when it is created.
 
 
 - What is a class instance?
 
+In TypeScript, a class instance is an object created from a class. When you instantiate a class, you create a specific occurrence of that class, and the resulting object is called an instance of the class. Instances have their own unique set of property values and can perform actions defined by the class's methods.
 
+Here's an example continuing from the previous one:
+
+```
+// Creating an instance of the Car class
+const myCar = new Car('Toyota', 'Camry', 2022);
+
+// Accessing properties and calling methods
+console.log(myCar.make); // Output: Toyota
+myCar.start(); // Output: The 2022 Toyota Camry is starting.
+```
+In this example, myCar is an instance of the Car class. It has specific values for the make, model, and year properties, as provided during its creation using the new keyword.
+
+Each instance of a class has its own state, which is independent of other instances of the same class. This allows you to create multiple objects with the same structure (defined by the class) but with different property values. Instances encapsulate data and behavior within the boundaries of the class, promoting modularity and reusability in your code.
 
 
 - How to check that a class is of a certain instance?
 
+In TypeScript, you can use the instanceof operator to check whether an object is an instance of a particular class. The instanceof operator returns true if the object is an instance of the specified class, and false otherwise.
 
+Here's an example using the Car class from the previous examples:
+
+```
+class Car {
+  make: string;
+  model: string;
+  year: number;
+
+  constructor(make: string, model: string, year: number) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+
+  start() {
+    console.log(`The ${this.year} ${this.make} ${this.model} is starting.`);
+  }
+}
+
+// Creating an instance of the Car class
+const myCar = new Car('Toyota', 'Camry', 2022);
+
+// Checking if an object is an instance of a particular class
+if (myCar instanceof Car) {
+  console.log('myCar is an instance of the Car class.');
+} else {
+  console.log('myCar is NOT an instance of the Car class.');
+}
+```
+
+In this example, myCar instanceof Car is used to check whether myCar is an instance of the Car class. If it is, the first branch of the if statement is executed, indicating that myCar is indeed an instance of the Car class.
+
+This type of check is useful in scenarios where you want to ensure that an object belongs to a specific class before performing certain operations or making assumptions about its structure and behavior.
 
 
 - What is `this` in a class?
 
+In a class in TypeScript (and in many other object-oriented programming languages), this refers to the instance of the class itself. It represents the current object on which a method is being invoked or the object being referred to within the class.
 
+Here's an example to illustrate the use of this in a TypeScript class:
+
+```
+class MyClass {
+  private value: number;
+
+  constructor(value: number) {
+    this.value = value;
+  }
+
+  getValue(): number {
+    return this.value;
+  }
+
+  multiplyBy(factor: number): number {
+    return this.value * factor;
+  }
+
+  setValue(newValue: number): void {
+    this.value = newValue;
+  }
+}
+
+// Creating an instance of MyClass
+const myInstance = new MyClass(5);
+
+// Using methods and accessing properties with 'this'
+console.log(myInstance.getValue()); // Output: 5
+console.log(myInstance.multiplyBy(2)); // Output: 10
+
+myInstance.setValue(8);
+console.log(myInstance.getValue()); // Output: 8
+```
+In this example:
+
+this.value refers to the value property of the current instance of MyClass.
+this is used to access and modify the properties and methods of the instance within the class methods.
+It's important to note that the value of this can be influenced by how a function is called. If a method is called as a standalone function or is passed as a callback, the value of this might not be what you expect. Arrow functions, on the other hand, capture the value of this from the surrounding context and can be used to maintain the expected behavior.
 
 
 - What is a class method?
+
+
+In object-oriented programming, a class method is a function that is associated with a class rather than with instances of the class. In many programming languages, including TypeScript, methods are functions that are defined within a class and are intended to operate on instances of that class or perform operations related to the class itself.
+
+Here's an example in TypeScript:
+
+```
+class Dog {
+  breed: string;
+
+  constructor(breed: string) {
+    this.breed = breed;
+  }
+
+  // This is a class method
+  bark(): void {
+    console.log(`The ${this.breed} dog is barking!`);
+  }
+}
+
+// Creating an instance of Dog
+const myDog = new Dog('Golden Retriever');
+
+// Calling the class method
+myDog.bark(); // Output: The Golden Retriever dog is barking!
+```
+
+In this example:
+
+The bark method is a class method because it is defined within the Dog class.
+It is invoked on an instance of the class (myDog), and it has access to the properties of that specific instance using this.
+Class methods are a way to encapsulate behavior related to a class, and they often operate on the properties of instances of that class. They contribute to the principles of encapsulation and abstraction in object-oriented programming, allowing you to define the behavior of objects within the context of the class itself.
+
+
 - What is the visibility of properties?
+
+
+In TypeScript, and in many other object-oriented programming languages, properties of a class can have different visibility levels, often referred to as access modifiers. These modifiers control the visibility and accessibility of properties within and outside the class. TypeScript provides three main access modifiers:
+
+Public (public): This is the default visibility if no modifier is specified. Public properties and methods can be accessed from anywhere, both within and outside the class.
+
+```
+class MyClass {
+  public myProperty: number;
+
+  constructor(value: number) {
+    this.myProperty = value;
+  }
+}
+
+const instance = new MyClass(42);
+console.log(instance.myProperty); // Accessing public property
+```
+
+Private (private): Private members are only accessible within the class where they are declared. They cannot be accessed from outside the class or from subclasses.
+
+```
+class MyClass {
+  private myProperty: number;
+
+  constructor(value: number) {
+    this.myProperty = value;
+  }
+
+  getPropertyValue(): number {
+    return this.myProperty; // Accessing private property within the class
+  }
+}
+
+const instance = new MyClass(42);
+// console.log(instance.myProperty); // Error: Property 'myProperty' is private
+console.log(instance.getPropertyValue()); // Accessing private property through a method
+```
+
+Protected (protected): Protected members are similar to private members but are accessible within the class and its subclasses.
+
+```
+class Animal {
+  protected sound: string;
+
+  constructor(sound: string) {
+    this.sound = sound;
+  }
+}
+
+class Dog extends Animal {
+  bark(): void {
+    console.log(`Woof, ${this.sound}!`); // Accessing protected property in a subclass
+  }
+}
+
+const myDog = new Dog('Woof');
+// console.log(myDog.sound); // Error: Property 'sound' is protected
+myDog.bark(); // Accessing protected property through a subclass method
+```
+
+These access modifiers provide a way to control the visibility of properties and methods, helping to encapsulate the internal implementation details of a class and promoting better software design by restricting access as needed.
+
+
 - What is the difference between `public`, `private` and `protected`?
 
+In TypeScript (and in many other object-oriented programming languages), public, private, and protected are access modifiers that define the visibility and accessibility of class members (properties and methods). Here's a summary of the differences between them:
+
+Public (public):
+
+Visibility: Public members are accessible from anywhere, both within and outside the class.
+Example:
+
+```
+class MyClass {
+  public myProperty: number;
+
+  constructor(value: number) {
+    this.myProperty = value;
+  }
+}
+
+const instance = new MyClass(42);
+console.log(instance.myProperty); // Accessing public property
+```
+
+Private (private):
+
+Visibility: Private members are only accessible within the class where they are declared. They cannot be accessed from outside the class or from subclasses.
+Example:
+
+```
+class MyClass {
+  private myProperty: number;
+
+  constructor(value: number) {
+    this.myProperty = value;
+  }
+
+  getPropertyValue(): number {
+    return this.myProperty; // Accessing private property within the class
+  }
+}
+
+const instance = new MyClass(42);
+// console.log(instance.myProperty); // Error: Property 'myProperty' is private
+console.log(instance.getPropertyValue()); // Accessing private property through a method
+```
+Protected (protected):
+
+Visibility: Protected members are accessible within the class and its subclasses. They cannot be accessed from outside the class hierarchy.
+Example:
+
+```
+class Animal {
+  protected sound: string;
+
+  constructor(sound: string) {
+    this.sound = sound;
+  }
+}
+
+class Dog extends Animal {
+  bark(): void {
+    console.log(`Woof, ${this.sound}!`); // Accessing protected property in a subclass
+  }
+}
+
+const myDog = new Dog('Woof');
+// console.log(myDog.sound); // Error: Property 'sound' is protected
+myDog.bark(); // Accessing protected property through a subclass method
+```
+Choosing the appropriate access modifier depends on the desired level of encapsulation and how you want to expose or restrict the usage of class members in your application. public members are accessible everywhere, private members are limited to the class itself, and protected members are accessible within the class and its subclasses.
+
+
 **🎉🎉🎉Update the Github Project board🎉🎉🎉**
+
+
 
 ## Level 3
 
