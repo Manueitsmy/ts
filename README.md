@@ -9,13 +9,13 @@ You will have to find the following information and test them as you go along in
   The different primitivive data types in TypeScript :
   * boolean: Represents a logical value, either true or false.
 
-```
+```ts
 let isDone: boolean = false;
 ```
 
   * number: Represents numeric values, both integers and floating-point numbers.
 
-```
+```ts
 let decimal: number = 6;
 let hex: number = 0xf00d;
 let binary: number = 0b1010;
@@ -24,28 +24,28 @@ let octal: number = 0o744;
 
   * string: Represents textual data, enclosed in single or double quotes.
 
-```
+```ts
 let color: string = "blue";
 let fullName: string = `John Doe`;
 ```
 
   * null and undefined: These are special types that have the values null and undefined, respectively.
 
-```
+```ts
 let n: null = null;
 let u: undefined = undefined;
 ```
 
   * symbol: Represents unique, immutable values that are often used as keys in objects.
 
-```
+```ts
 let sym1 = Symbol("key1");
 let sym2 = Symbol("key2");
 ```
 
   * bigint: Represents arbitrary precision integers. This is a feature added in TypeScript 3.2.
 
-```
+```ts
 let bigIntValue: bigint = 100n;
 ```
 
@@ -58,14 +58,14 @@ let bigIntValue: bigint = 100n;
   * Using Array<Type> syntax:
   * You can also use the readonly modifier to create an immutable array:
 
-```
+```ts
   // Readonly array of numbers
 let readOnlyNumbers: readonly number[] = [1, 2, 3, 4, 5];
 ```
 
   * Additionally, TypeScript allows you to specify a tuple type, which is an array with a fixed number of elements, each of a specific type:
 
-```
+```ts
   // Tuple type
 let tuple: [number, string, boolean] = [1, "hello", true];
 ```
@@ -80,7 +80,7 @@ In TypeScript, the any type is a special type that is used to represent values o
 Here's an example of using the any type:
 
 
-```
+```ts
 let dynamicValue: any = 5;
 dynamicValue = "hello";
 dynamicValue = true;
@@ -98,7 +98,7 @@ If you need to work with values of unknown types but still want to maintain some
 
 In TypeScript, you can explicitly type the return value of a function as well as the types of its parameters by specifying the types in the function signature. Here's an example:
 
-```
+```ts
 // Function with explicit parameter types and return type
 function addNumbers(x: number, y: number): number {
     return x + y;
@@ -118,14 +118,14 @@ You can also use TypeScript's type inference to automatically infer the types of
 
 If a function does not return anything, you can specify the return type as void:
 
-```
+```ts
 function logMessage(message: string): void {
     console.log(message);
 }
 ```
 If a function can return multiple types, you can use union types:
 
-```
+```ts
 function getStringOrNumber(value: boolean): string | number {
     return value ? "hello" : 42;
 }
@@ -143,12 +143,11 @@ This function can return either a string or a number, and the return type is spe
 
 - What is a class?
 
-
 In TypeScript, a class is a fundamental building block for object-oriented programming. It provides a way to create blueprints for objects with properties and methods. Classes serve as a template for creating objects with similar structures and behavior.
 
 Here's a basic example of a class in TypeScript:
 
-```
+```ts
 class Car {
   // Properties
   make: string;
@@ -196,7 +195,7 @@ In TypeScript, a class instance is an object created from a class. When you inst
 
 Here's an example continuing from the previous one:
 
-```
+```ts
 // Creating an instance of the Car class
 const myCar = new Car('Toyota', 'Camry', 2022);
 
@@ -215,7 +214,7 @@ In TypeScript, you can use the instanceof operator to check whether an object is
 
 Here's an example using the Car class from the previous examples:
 
-```
+```ts
 class Car {
   make: string;
   model: string;
@@ -254,7 +253,7 @@ In a class in TypeScript (and in many other object-oriented programming language
 
 Here's an example to illustrate the use of this in a TypeScript class:
 
-```
+```ts
 class MyClass {
   private value: number;
 
@@ -299,7 +298,7 @@ In object-oriented programming, a class method is a function that is associated 
 
 Here's an example in TypeScript:
 
-```
+```ts
 class Dog {
   breed: string;
 
@@ -334,7 +333,7 @@ In TypeScript, and in many other object-oriented programming languages, properti
 
 Public (public): This is the default visibility if no modifier is specified. Public properties and methods can be accessed from anywhere, both within and outside the class.
 
-```
+```ts
 class MyClass {
   public myProperty: number;
 
@@ -349,7 +348,7 @@ console.log(instance.myProperty); // Accessing public property
 
 Private (private): Private members are only accessible within the class where they are declared. They cannot be accessed from outside the class or from subclasses.
 
-```
+```ts
 class MyClass {
   private myProperty: number;
 
@@ -369,7 +368,7 @@ console.log(instance.getPropertyValue()); // Accessing private property through 
 
 Protected (protected): Protected members are similar to private members but are accessible within the class and its subclasses.
 
-```
+```ts
 class Animal {
   protected sound: string;
 
@@ -401,7 +400,7 @@ Public (public):
 Visibility: Public members are accessible from anywhere, both within and outside the class.
 Example:
 
-```
+```ts
 class MyClass {
   public myProperty: number;
 
@@ -419,7 +418,7 @@ Private (private):
 Visibility: Private members are only accessible within the class where they are declared. They cannot be accessed from outside the class or from subclasses.
 Example:
 
-```
+```ts
 class MyClass {
   private myProperty: number;
 
@@ -441,7 +440,7 @@ Protected (protected):
 Visibility: Protected members are accessible within the class and its subclasses. They cannot be accessed from outside the class hierarchy.
 Example:
 
-```
+```ts
 class Animal {
   protected sound: string;
 
@@ -470,14 +469,259 @@ Choosing the appropriate access modifier depends on the desired level of encapsu
 ## Level 3
 
 - How to split our program into different files? (e.g. a class in a file that I import into another)
+
+
+In TypeScript, you can split your program into different files using modules. Modules in TypeScript help organize code into separate files, allowing you to structure your application in a modular and maintainable way. Here's a step-by-step guide on how to split a program into different files:
+
+1. Create a TypeScript File for Each Module:
+Create separate TypeScript files for different modules of your program. For example, if you have a class Car and another class Driver, you might create two files, car.ts and driver.ts.
+
+car.ts:
+
+```ts
+// car.ts
+export class Car {
+  make: string;
+  model: string;
+
+  constructor(make: string, model: string) {
+    this.make = make;
+    this.model = model;
+  }
+
+  start() {
+    console.log(`The ${this.make} ${this.model} is starting.`);
+  }
+}
+```
+driver.ts:
+
+```ts
+// driver.ts
+export class Driver {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  driveCar(car: Car) {
+    console.log(`${this.name} is driving the ${car.make} ${car.model}.`);
+  }
+}
+```
+
+2. Import Modules in Your Main Program File:
+In your main program file, you can import the modules using the import statement.
+
+main.ts:
+
+```ts
+// main.ts
+import { Car } from './car';
+import { Driver } from './driver';
+
+// Creating instances
+const myCar = new Car('Toyota', 'Camry');
+const myDriver = new Driver('John Doe');
+
+// Using the imported modules
+myCar.start();
+myDriver.driveCar(myCar);
+```
+
+3. Compile and Run Your Program:
+Compile your TypeScript files using the TypeScript compiler (tsc). The compiled JavaScript files can then be run using Node.js or included in an HTML file.
+
+Compile (bash):
+
+```bash
+tsc main.ts car.ts driver.ts
+
+```
+
+This generates JavaScript files (main.js, car.js, driver.js) from your TypeScript files.
+
+Run:
+```bash
+node main.js
+```
+
+This will execute your main program, and you'll see the output.
+
+By organizing your code into modules, you promote better code separation, reusability, and maintainability. The export and import statements help control which parts of your code are accessible from other files, providing a clear interface for your modules.
+
+
 - What is the `export` keyword?
+
+
+In TypeScript, the export keyword is used to make classes, functions, or variables available for use in other files or modules. When you declare a class, function, or variable with export, it becomes part of the module's public interface, allowing other modules to import and use it.
+
+Here's a basic example of using the export keyword:
+
+```ts
+// car.ts
+export class Car {
+  make: string;
+  model: string;
+
+  constructor(make: string, model: string) {
+    this.make = make;
+    this.model = model;
+  }
+
+  start() {
+    console.log(`The ${this.make} ${this.model} is starting.`);
+  }
+}
+```
+
+In this example, the Car class is marked with export, making it accessible from other TypeScript files or modules. Now, you can import and use this class in another file:
+
+```ts
+// main.ts
+import { Car } from './car';
+
+const myCar = new Car('Toyota', 'Camry');
+myCar.start();
+```
+The export keyword can be used in various ways:
+
+Exporting Declarations:
+
+export class - exports a class.
+export interface - exports an interface.
+export function - exports a function.
+export const - exports a constant.
+Exporting Statements:
+
+export { name1, name2, ... } - exports specified declarations.
+export * from 'module' - re-exports all exports from another module.
+Default Export:
+
+export default - exports the default export of a module.
+Here's an example with a default export:
+
+```ts
+// utility.ts
+const message = 'Hello, World!';
+
+export default message;
+```
+In another file, you can import the default export like this:
+
+```ts
+// main.ts
+import greeting from './utility';
+
+console.log(greeting); // Output: Hello, World!
+```
+Using export and import facilitates the creation of modular and maintainable code by allowing you to organize your TypeScript code into separate files and modules.
+
+
 - What is the `import` keyword?
+
+In TypeScript, the import keyword is used to bring functionalities (classes, functions, variables, etc.) from one module (file) into another. It allows you to use the exported features of one module in another module. The import statement is an essential part of module-based development, enabling you to organize and structure your code in a modular way.
+
+Here's a basic example:
+
+```ts
+// car.ts
+export class Car {
+  make: string;
+  model: string;
+
+  constructor(make: string, model: string) {
+    this.make = make;
+    this.model = model;
+  }
+
+  start() {
+    console.log(`The ${this.make} ${this.model} is starting.`);
+  }
+}
+```
+
+In another file, you can use the import keyword to bring in the Car class:
+
+```ts
+// main.ts
+import { Car } from './car';
+
+const myCar = new Car('Toyota', 'Camry');
+myCar.start();
+```
+
+Here are a few ways you can use the import statement:
+
+Importing Named Exports:
+
+When a module exports multiple features, you can selectively import only the ones you need:
+
+
+```ts
+// Importing specific features
+import { Feature1, Feature2 } from './module';
+```
+
+Importing All Exports (*):
+
+You can import all exports from a module using the * wildcard:
+
+```ts
+// Importing all exports
+import * as Module from './module';
+```
+
+Renaming Imported Items:
+
+You can rename imported items for clarity or to avoid naming conflicts:
+
+```ts
+// Renaming imports
+import { OldName as NewName } from './module';
+```
+
+Importing a Default Export:
+
+When a module has a default export, you can import it without using braces {}:
+
+```ts
+// Importing a default export
+import DefaultExport from './module';
+```
+Combining Imports:
+
+You can combine various import styles in a single statement:
+
+```ts
+// Combining imports
+import DefaultExport, { Feature1, Feature2 as RenamedFeature } from './module';
+```
+
+The import and export keywords, when used together, provide a powerful mechanism for creating modular and maintainable TypeScript code. They enable you to organize your code into separate files, making it easier to manage, understand, and collaborate on larger projects.
+
+
 - What's inheritance?
+
+
+
 - How to call the constructor of a parent class?
+
+
+
 - How to call a method of a parent class?
+
+
+
 - What is polymorphism?
 
+
+
+
 **🎉🎉🎉Update the Github Project board🎉🎉🎉**
+
+
 
 ## Boss level
 
