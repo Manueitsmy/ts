@@ -9,45 +9,45 @@ You will have to find the following information and test them as you go along in
   The different primitivive data types in TypeScript :
   * boolean: Represents a logical value, either true or false.
 
-  ```
+```
 let isDone: boolean = false;
-  ```
+```
 
   * number: Represents numeric values, both integers and floating-point numbers.
 
-  ```
+```
 let decimal: number = 6;
 let hex: number = 0xf00d;
 let binary: number = 0b1010;
 let octal: number = 0o744;
-  ```
+```
 
   * string: Represents textual data, enclosed in single or double quotes.
 
-  ```
+```
 let color: string = "blue";
 let fullName: string = `John Doe`;
-  ```
+```
 
   * null and undefined: These are special types that have the values null and undefined, respectively.
 
-  ```
+```
 let n: null = null;
 let u: undefined = undefined;
-  ```
+```
 
   * symbol: Represents unique, immutable values that are often used as keys in objects.
 
-  ```
+```
 let sym1 = Symbol("key1");
 let sym2 = Symbol("key2");
-  ```
+```
 
   * bigint: Represents arbitrary precision integers. This is a feature added in TypeScript 3.2.
 
-  ```
+```
 let bigIntValue: bigint = 100n;
-  ```
+```
 
   These primitive data types provide the building blocks for more complex data structures and objects in TypeScript.
 
@@ -58,14 +58,14 @@ let bigIntValue: bigint = 100n;
   * Using Array<Type> syntax:
   * You can also use the readonly modifier to create an immutable array:
 
-  ```
+```
   // Readonly array of numbers
 let readOnlyNumbers: readonly number[] = [1, 2, 3, 4, 5];
 ```
 
   * Additionally, TypeScript allows you to specify a tuple type, which is an array with a fixed number of elements, each of a specific type:
 
-  ```
+```
   // Tuple type
 let tuple: [number, string, boolean] = [1, "hello", true];
 ```
@@ -80,11 +80,11 @@ In TypeScript, the any type is a special type that is used to represent values o
 Here's an example of using the any type:
 
 
- ```
+```
 let dynamicValue: any = 5;
 dynamicValue = "hello";
 dynamicValue = true;
- ```
+```
 
 In the above example, dynamicValue is initially assigned a number, then a string, and finally a boolean. Since its type is any, TypeScript doesn't raise any errors.
 
