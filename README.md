@@ -705,18 +705,181 @@ The import and export keywords, when used together, provide a powerful mechanism
 - What's inheritance?
 
 
+In TypeScript, as in many object-oriented programming languages, inheritance is a mechanism that allows a class to inherit properties and methods from another class. This promotes code reuse and the creation of a hierarchical relationship between classes. The class that is being inherited from is called the "base class" or "parent class," and the class that inherits from it is called the "derived class" or "child class."
+
+Here's a basic example of inheritance in TypeScript:
+
+```ts
+// Base class
+class Animal {
+    constructor(public name: string) {}
+
+    makeSound() {
+        console.log("Some generic sound");
+    }
+}
+
+// Derived class
+class Dog extends Animal {
+    constructor(name: string, public breed: string) {
+        super(name); // Call the constructor of the base class
+    }
+
+    makeSound() {
+        console.log("Woof, woof!");
+    }
+
+    fetch() {
+        console.log("Fetching the ball!");
+    }
+}
+
+// Using the classes
+const myDog = new Dog("Buddy", "Golden Retriever");
+console.log(myDog.name); // Accessing property from the base class
+myDog.makeSound(); // Overridden method from the derived class
+myDog.fetch(); // Method specific to the derived class
+```
+
+In this example:
+
+Animal is the base class with a property name and a method makeSound.
+Dog is the derived class that extends Animal. It has its own property breed, overrides the makeSound method, and introduces a new method fetch.
+The super(name) call in the Dog constructor is used to call the constructor of the base class and initialize the name property.
+Inheritance in TypeScript follows a single inheritance model, meaning that a class can only inherit from one base class. However, TypeScript supports mixins, interfaces, and other mechanisms to achieve similar effects and address multiple inheritance scenarios.
+
 
 - How to call the constructor of a parent class?
 
 
+In TypeScript, to call the constructor of a parent class (base class) from a derived class (child class), you use the super keyword. The super keyword is used to invoke the constructor or methods of the parent class.
+
+Here's an example:
+
+```ts
+class Animal {
+    constructor(public name: string) {
+        console.log(`Creating an animal named ${name}`);
+    }
+
+    makeSound() {
+        console.log("Some generic sound");
+    }
+}
+
+class Dog extends Animal {
+    constructor(name: string, public breed: string) {
+        super(name); // Call the constructor of the base class
+        console.log(`Creating a ${breed} dog named ${name}`);
+    }
+
+    makeSound() {
+        console.log("Woof, woof!");
+    }
+}
+
+// Using the classes
+const myDog = new Dog("Buddy", "Golden Retriever");
+```
+In this example, the Dog class extends the Animal class. The super(name) line in the Dog constructor calls the constructor of the Animal class, passing the name parameter to it. This ensures that the initialization logic of the base class is executed before the specific logic of the derived class.
+
+So, when you create an instance of Dog (const myDog = new Dog("Buddy", "Golden Retriever");), both the Animal constructor and the Dog constructor are called, and you see output from both classes.
+
+Keep in mind that if the base class has a constructor that requires parameters, the super call in the derived class constructor should provide those parameters. This ensures that the base class is properly initialized.
+
 
 - How to call a method of a parent class?
+
+
+To call a method of a parent class from a child class in TypeScript, you also use the super keyword. The super keyword can be used to invoke methods from the parent class within the methods of the child class. Here's an example:
+
+```ts
+class Animal {
+    constructor(public name: string) {}
+
+    makeSound() {
+        console.log("Some generic sound");
+    }
+}
+
+class Dog extends Animal {
+    constructor(name: string, public breed: string) {
+        super(name); // Call the constructor of the base class
+    }
+
+    makeSound() {
+        super.makeSound(); // Call the makeSound method of the base class
+        console.log("Woof, woof!");
+    }
+
+    fetch() {
+        console.log("Fetching the ball!");
+    }
+}
+
+// Using the classes
+const myDog = new Dog("Buddy", "Golden Retriever");
+myDog.makeSound(); // Calls the overridden makeSound method in Dog, which in turn calls the makeSound method of Animal
+```
+In this example, the makeSound method in the Dog class calls the makeSound method of the Animal class using super.makeSound(). This allows you to reuse or extend the behavior defined in the parent class while adding or modifying behavior in the child class.
+
+Keep in mind that calling super.makeSound() is not mandatory. You can choose whether to call the parent class method or not, depending on your specific requirements in the child class. If you do call it, it typically happens in addition to the specific behavior implemented in the child class method.
 
 
 
 - What is polymorphism?
 
 
+Polymorphism is a fundamental concept in object-oriented programming (OOP) that allows objects of different types to be treated as objects of a common base type. The term "polymorphism" is derived from the Greek words "poly" (meaning many) and "morphos" (meaning forms). In the context of OOP, polymorphism allows a single interface or method to be used with objects of various types.
+
+There are two main types of polymorphism: compile-time (or static) polymorphism and runtime (or dynamic) polymorphism.
+
+1 - Compile-time Polymorphism (Method Overloading):
+Compile-time polymorphism occurs when you have multiple methods in the same class with the same name but different parameters. The appropriate method to call is determined at compile time based on the number and types of arguments.
+
+Example in TypeScript:
+
+```ts
+class MathOperations {
+    add(x: number, y: number): number {
+        return x + y;
+    }
+
+    add(x: string, y: string): string {
+        return x + y;
+    }
+}
+
+const math = new MathOperations();
+console.log(math.add(5, 10));        // Calls the first add method
+console.log(math.add("Hello", " ")); // Calls the second add method
+```
+
+2 - Runtime Polymorphism (Method Overriding):
+Runtime polymorphism is achieved through method overriding. It occurs when a subclass provides a specific implementation of a method that is already defined in its superclass. The decision about which method to call is made at runtime, based on the actual type of the object.
+
+Example in TypeScript:
+
+```ts
+class Animal {
+    makeSound(): void {
+        console.log("Some generic sound");
+    }
+}
+
+class Dog extends Animal {
+    makeSound(): void {
+        console.log("Woof, woof!");
+    }
+}
+
+const myDog: Animal = new Dog();
+myDog.makeSound(); // Calls the makeSound method of the Dog class at runtime
+```
+
+In this example, even though the variable myDog is declared as type Animal, it refers to an instance of the Dog class. When the makeSound method is called, it invokes the overridden method in the Dog class.
+
+Polymorphism simplifies code and makes it more extensible, allowing new classes to be added with little or no modification to existing code. It is a key principle in achieving code flexibility and reusability in object-oriented systems.
 
 
 **🎉🎉🎉Update the Github Project board🎉🎉🎉**
